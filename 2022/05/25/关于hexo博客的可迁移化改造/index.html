@@ -200,7 +200,7 @@
 <p>缺点<br>1  没有wordpress那样的后台，不能在线编辑，需要自己本地生成编辑然后再去服务器或者Github上把编译好的传上去。<br>2  如果换电脑或者系统，可能就要重新弄了</p>
 <p>就像上边hugo hexo Jekyll这些都是比较流行的，用的比较多，我为什么选择hexo呢？很简单，就是之前部署过，实际上我推荐的是hugo，号称编译最快<br>而且是go语言，我也比较感兴趣想试水，再加上是以上几种在GitHub上star最多的，应该是首选。</p>
 <p>但是，鉴于之前GitHub Page已经用了hexo，那就选择这个先玩明白hexo再说，未来的架构选择肯定还是hugo—-动态wordpress—-动态更好的或者自己手撸。</p>
-<h3 id="hexo改造"><a href="#hexo改造" class="headerlink" title="hexo改造"></a>hexo改造</h3><p>这次改造的重点是针对我之前对静态博客弃坑的痛点：可迁移，异地编译<br>这里的迁移指的不只是，说我写的博客可以迁出去，实际上现在主流的自建静态/动态博客框架，或者博客运营平台都支持markdown文档。<br><br>可迁移就是我换电脑了，或者说我用别人的电脑也可以编辑文章给自己的博客更新，这一点在我刚开始使用hexo，发现自己本地配置环境也就罢了。<br>很多东西传到GitHub Page只是编译好的静态文件，你换个电脑可能就没办法根据你GitHub Page上的东西继续。</p>
+<h3 id="hexo改造"><a href="#hexo改造" class="headerlink" title="hexo改造"></a>hexo改造</h3><p>这次改造的重点是针对我之前对静态博客弃坑的痛点：可迁移，异地编译<br>这里的迁移指的不只是，说我写的博客可以迁出去，实际上现在主流的自建静态&#x2F;动态博客框架，或者博客运营平台都支持markdown文档。<br><br>可迁移就是我换电脑了，或者说我用别人的电脑也可以编辑文章给自己的博客更新，这一点在我刚开始使用hexo，发现自己本地配置环境也就罢了。<br>很多东西传到GitHub Page只是编译好的静态文件，你换个电脑可能就没办法根据你GitHub Page上的东西继续。</p>
 <p>所以这次的改造其实是通过Git分支管理来解决这个问题<br>参照的主要文章是:<br></p>
 <p><a target="_blank" rel="noopener" href="https://liujiaboy.github.io/2020/03/06/Github-Hexo/" title="Hexo的可迁移改造">Hexo的可迁移改造</a><br></p>
 <p>主要的思路就是，Git创建分支：master，hexo两个分支<br>master分支主要是hexo编译后的静态文件，主要是为了挂载在Github Page上的（这个是可以在_config.yml上面指定的）<br>而新创建的hexo分支，则是你本地hexo的全部备份，这样你换电脑重装系统，只需要拉一下这个分支，配置好node.js环境，然后稍微做一些操作就可以，在新的电脑上生成文件编译了。<br></p>
