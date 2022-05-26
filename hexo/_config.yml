@@ -105,3 +105,19 @@ deploy:
   type: git
   repo: https://github.com/stubborn123/stubborn123.github.io.git
   branch: master
+
+# Auot Excerpt
+auto_excerpt:
+  enable: true
+  length: 100
+prism_plugin:
+  mode: 'preprocess' # realtime/preprocess
+  theme: 'default'
+  line_number: false # default false  
+  
+  
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000 
