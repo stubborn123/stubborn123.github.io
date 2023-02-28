@@ -36,6 +36,20 @@ tags:
 
 <a href="https://liujiaboy.github.io/2020/03/06/Github-Hexo/" title="Hexo的可迁移改造">Hexo的可迁移改造</a><br>
 
+PS:
+这里只要配置好之后，在部署命令执行之后就可以修改同步到gituhb上
+```
+部署命令：
+hexo generate --deploy
+hexo deploy --generate
+
+```
+效果如图
+![avatar](https://images.weserv.nl/?url=https://article.biliimg.com/bfs/article/166eb5abfcf8115e01245ec1c2db1b2b96155138.png)
+
+
+
+
 主要的思路就是，Git创建分支：master，hexo两个分支
 master分支主要是hexo编译后的静态文件，主要是为了挂载在Github Page上的（这个是可以在_config.yml上面指定的）
 而新创建的hexo分支，则是你本地hexo的全部备份，这样你换电脑重装系统，只需要拉一下这个分支，配置好node.js环境，然后稍微做一些操作就可以，在新的电脑上生成文件编译了。<br>
@@ -43,9 +57,11 @@ master分支主要是hexo编译后的静态文件，主要是为了挂载在Gith
 这个思路其实可以套用在其他的静态博客挂载的Github Page上的，对了最好把全量备份的分支设置成默认分支，这样以后直接来下来直接改，否则拉下来的master分支都是编译好的文件用来直接展示，没啥用。
 
 
+
+
 ### hexo的一些设置
-hexo涉及到一些基本操作，需要自己手动设置，比如说要换成自己的域名，更换个主题。
-还有一些是需要自己定制化的一些，比如说默认展示文章全部的就听坑爹的，我们可以设置为预览的形式。
+hexo涉及到一些基本操作，需要自己手动设置，比如说要换成自己的域名，更换个主题。而且Hexo插件真的很丰富，少去很多自己动手去修改的要去实现的功能
+还有一些是需要自己定制化的一些，比如说默认展示文章全部的就挺坑爹的，我们可以设置为预览的形式。
 (实际上由于主题限制，像有些yml配置可能不生效，不如这个缩略的，可能要在文章里面添加more标签，其实wordpress也这样)
 
 ```
