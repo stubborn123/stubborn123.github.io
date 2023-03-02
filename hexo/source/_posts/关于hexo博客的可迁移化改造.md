@@ -76,6 +76,7 @@ length: 300  #设置预览的字数
 npm install hexo-wordcount --save
 ```
 
+#### admin插件在线编辑
 这里推荐一个插件，因为静态页面，很多操作还要通过命令，比如生成新的文章，发布这些。博客以内容为主，如何简化写作的，尤其是我不想去post目录里面去修改md文章，能解决在线编辑这个问题。我这边添加一个插件hexo-admin
 
 具体的步骤：
@@ -87,6 +88,13 @@ npm install --save hexo-admin
 ```
 （3）启动服务器，进入到admin,就可以进入在线编辑页
 localhost:4000/admin
+
+#### 统计浏览量
+一般来说，博客都会有统计的一些功能，比如说访客人数和总访问量。
+
+以下是通过busuanzi来完成的，我这还是next主题，就更方便了，连脚本都不需要安装。
+
+<a href="https://chrischen0405.github.io/2018/09/11/post20180911/" title="Hexo的可迁移改造">hexo页脚添加访客人数和总访问量</a><br>
 
 
 以下是关于一些功能的设置以及hexo的插件列表地址：
