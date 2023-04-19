@@ -20,19 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="红黑树，应该是一种我们听到的比较多的一个数据结构，比如说JDK1.8的HashMap，在之前数组加链表的结构的基础上，如果链表太长，就会转为红黑树。作为一个比较复杂的数据结构，但是本身底子还是二叉树。但是为什么搞一个单独的二叉树，难道红黑树就是二叉树染个颜色吗，他和二叉树区别什么，意义何在有什么作用？红黑树和我们另一个见到比较多的B+树有什么区别，想我们知道B+树用的最知名的一个案例就是关系型数据">
+  <meta name="description" content="因为之前的文章只是介绍hexo的相关改造，实际跟工程一样，开发只占20%到30%，剩下的大头成本主要是维护和优化。所以说hexo的优化和美化也是一个可以研究的，比如说扩展功能，调整主题，安装插件等，来丰富博客的功能。 主题设置我这边选的是NEXT主题，我们知道有一个配置文件_config.yml。主题对应也有这个设置，用来设置布局样式，展示按钮等。以下是主题的配置文件位置，后面我们很多的主题设置都">
 <meta property="og:type" content="article">
-<meta property="og:title" content="红黑树">
-<meta property="og:url" content="http://example.com/2023/02/28/%E7%BA%A2%E9%BB%91%E6%A0%91/index.html">
+<meta property="og:title" content="hexo的优化和美化">
+<meta property="og:url" content="http://example.com/2023/04/19/hexo%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E7%BE%8E%E5%8C%96/index.html">
 <meta property="og:site_name" content="ZP Blog">
-<meta property="og:description" content="红黑树，应该是一种我们听到的比较多的一个数据结构，比如说JDK1.8的HashMap，在之前数组加链表的结构的基础上，如果链表太长，就会转为红黑树。作为一个比较复杂的数据结构，但是本身底子还是二叉树。但是为什么搞一个单独的二叉树，难道红黑树就是二叉树染个颜色吗，他和二叉树区别什么，意义何在有什么作用？红黑树和我们另一个见到比较多的B+树有什么区别，想我们知道B+树用的最知名的一个案例就是关系型数据">
+<meta property="og:description" content="因为之前的文章只是介绍hexo的相关改造，实际跟工程一样，开发只占20%到30%，剩下的大头成本主要是维护和优化。所以说hexo的优化和美化也是一个可以研究的，比如说扩展功能，调整主题，安装插件等，来丰富博客的功能。 主题设置我这边选的是NEXT主题，我们知道有一个配置文件_config.yml。主题对应也有这个设置，用来设置布局样式，展示按钮等。以下是主题的配置文件位置，后面我们很多的主题设置都">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-28T02:54:11.000Z">
-<meta property="article:modified_time" content="2023-04-19T10:10:34.573Z">
+<meta property="og:image" content="http://example.com/images/hexo_next.png">
+<meta property="article:published_time" content="2023-04-19T09:13:17.000Z">
+<meta property="article:modified_time" content="2023-04-19T10:10:34.572Z">
 <meta property="article:author" content="ZP">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/hexo_next.png">
 
-<link rel="canonical" href="http://example.com/2023/02/28/%E7%BA%A2%E9%BB%91%E6%A0%91/">
+<link rel="canonical" href="http://example.com/2023/04/19/hexo%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E7%BE%8E%E5%8C%96/">
 
 
 <script id="page-configurations">
@@ -45,7 +47,7 @@
   };
 </script>
 
-  <title>红黑树 | ZP Blog</title>
+  <title>hexo的优化和美化 | ZP Blog</title>
   
 
 
@@ -209,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/28/%E7%BA%A2%E9%BB%91%E6%A0%91/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/19/hexo%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E7%BE%8E%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -222,7 +224,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          红黑树
+          hexo的优化和美化
         </h1>
 
         <div class="post-meta">
@@ -231,16 +233,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-02-28 10:54:11" itemprop="dateCreated datePublished" datetime="2023-02-28T10:54:11+08:00">2023-02-28</time>
+              <time title="创建时间：2023-04-19 17:13:17 / 修改时间：18:10:34" itemprop="dateCreated datePublished" datetime="2023-04-19T17:13:17+08:00">2023-04-19</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-19 18:10:34" itemprop="dateModified" datetime="2023-04-19T18:10:34+08:00">2023-04-19</time>
-              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -260,9 +256,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>红黑树，应该是一种我们听到的比较多的一个数据结构，比如说JDK1.8的HashMap，在之前数组加链表的结构的基础上，如果链表太长，就会转为红黑树。作为一个比较复杂的数据结构，但是本身底子还是二叉树。但是为什么搞一个单独的二叉树，难道红黑树就是二叉树染个颜色吗，他和二叉树区别什么，意义何在有什么作用？红黑树和我们另一个见到比较多的B+树有什么区别，想我们知道B+树用的最知名的一个案例就是关系型数据库，红黑树可不可以取而代之？</p>
-<p>这里就是更整体的了解红黑树，而不是单独一个角度去认识红黑树，比如说红黑树的结构，为什么弄一个这么“拧巴”的二叉树。左旋右旋的目的，和其他类似的数据结构对比。</p>
-<h3 id="红黑树基础：二叉树"><a href="#红黑树基础：二叉树" class="headerlink" title="红黑树基础：二叉树"></a>红黑树基础：二叉树</h3><p>红黑树本身结构，在不考虑节点颜色，以及先加入元素的左旋右旋的动作等。第一眼看上去，这就是二叉树，所以要先了解二叉树，才能有个对红黑树的基础认知，以及为什么要单独搞出来一个红黑树，用它来解决一些什么具体问题，为什么我们一些源码底层采用红黑树，而不是采用更简单的二叉树。</p>
+        <p>因为之前的文章只是介绍hexo的相关改造，实际跟工程一样，开发只占20%到30%，剩下的大头成本主要是维护和优化。所以说hexo的优化和美化也是一个可以研究的，比如说扩展功能，调整主题，安装插件等，来丰富博客的功能。</p>
+<h3 id="主题设置"><a href="#主题设置" class="headerlink" title="主题设置"></a>主题设置</h3><p>我这边选的是NEXT主题，我们知道有一个配置文件_config.yml。主题对应也有这个设置，用来设置布局样式，展示按钮等。以下是主题的配置文件位置，后面我们很多的主题设置都要修改这个文件</p>
+<p><img src="/images/hexo_next.png" alt="主题配置文件位置"></p>
+<h4 id="NEXT主页样式"><a href="#NEXT主页样式" class="headerlink" title="NEXT主页样式"></a>NEXT主页样式</h4><p>next有四种风格,在站点配置文件搜索字段Scheme Settings可以看到，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scheme: Muse</span><br><span class="line">#scheme: Mist</span><br><span class="line">#scheme: Pisces</span><br><span class="line">#scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+<p>一般默认选择的是Muse，这里用的是四种：Gemini</p>
+<h4 id="menu开启与设置"><a href="#menu开启与设置" class="headerlink" title="menu开启与设置"></a>menu开启与设置</h4><p>设置完之后，发现整个博客是光秃秃的，看到别人的博客都有很多menu按钮。这些menu在哪里有呢，实际上在Next主题的配置文件具有对应的按钮在里面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># ---------------------------------------------------------------</span><br><span class="line"># Menu Settings</span><br><span class="line"># ---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"># Usage: `Key: /link/ || icon`</span><br><span class="line"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.</span><br><span class="line"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span><br><span class="line"># When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -&gt; archives).</span><br><span class="line"># External url should start with http:// or https://</span><br><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  schedule: /schedule/ || fa fa-calendar</span><br><span class="line">  sitemap: /sitemap.xml || fa fa-sitemap</span><br><span class="line">  commonweal: /404/ || fa fa-heartbeat</span><br></pre></td></tr></table></figure>
+<p>里面有些没有展示出来，是被注释了，我们解开注释就可以了。</p>
+<p>但是menu有了，但是点击报错跳到空白页面，这就需要我们自己设置，已分类和标签例子。</p>
+<p>刚开始我们点击这两个按钮会报错“Cannot GET XXX”错误，问题的原因是我们没有初始化，初始化具体的步骤：<br></p>
+<p>1  创建对应的文件夹，可以通过命令在git bash 中输入以下代码创建相应的page：hexo new page “tags”hexo new page “categories”来创建文件夹。也可以手动创建文件夹，然后在里面创建index.md文件。</p>
+<p>2  在第一步完成后会在source文件夹中出现tags和categories的文件夹，在各自的文件夹里打开index.md文件进行修改(多加上一个type属性),标签的tags的index.md里面添加type: “tags”</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"><span class="attr">title</span>: tags</span><br><span class="line"><span class="attr">date</span>: <span class="number">2023</span>-<span class="number">04</span>-<span class="number">19</span> <span class="number">17</span>:<span class="number">04</span>:<span class="number">58</span></span><br><span class="line"><span class="attr">type</span>: <span class="string">&quot;tags&quot;</span></span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="文章设置"><a href="#文章设置" class="headerlink" title="文章设置"></a>文章设置</h3><p>文件有很多属性，比如说tag标签，设置置顶文件等，一般来说这些属性都在对应的markdown文件的Front-matter部分。</p>
+<h4 id="文章置顶"><a href="#文章置顶" class="headerlink" title="文章置顶"></a>文章置顶</h4><p>打开对应的文章文件，对应的目录是在source目录下面的_posts目录，里面保存的是我们的博客文章，文章也有对应的属性，在Front-matter里面设置的。我们通过设置sticky属性，设置为true即可置顶对应的这个文章。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: Mockito实战</span><br><span class="line">author: ZP</span><br><span class="line">date: 2023-04-19 16:40:35</span><br><span class="line">tags: Mockito</span><br><span class="line">sticky: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -278,13 +292,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/05/25/%E5%85%B3%E4%BA%8Ehexo%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%8F%AF%E8%BF%81%E7%A7%BB%E5%8C%96%E6%94%B9%E9%80%A0/" rel="prev" title="关于hexo博客的可迁移化改造">
-      <i class="fa fa-chevron-left"></i> 关于hexo博客的可迁移化改造
+    <a href="/2023/04/19/Mockito%E5%AE%9E%E6%88%98/" rel="prev" title="Mockito实战">
+      <i class="fa fa-chevron-left"></i> Mockito实战
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/04/19/Mockito%E5%AE%9E%E6%88%98/" rel="next" title="Mockito实战">
-      Mockito实战 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -343,7 +354,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91%E5%9F%BA%E7%A1%80%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">红黑树基础：二叉树</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">主题设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NEXT%E4%B8%BB%E9%A1%B5%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">NEXT主页样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#menu%E5%BC%80%E5%90%AF%E4%B8%8E%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">menu开启与设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">文章设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%BD%AE%E9%A1%B6"><span class="nav-number">2.1.</span> <span class="nav-text">文章置顶</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
