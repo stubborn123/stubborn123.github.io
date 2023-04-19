@@ -104,7 +104,7 @@ theme: next
 deploy:
   type: git
   repo: https://github.com/stubborn123/stubborn123.github.io.git
-  branch: hexo
+  branch: master
 
 # Auot Excerpt
 auto_excerpt:
