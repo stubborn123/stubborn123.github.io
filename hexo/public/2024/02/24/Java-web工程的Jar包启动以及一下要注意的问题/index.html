@@ -20,21 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="因为之前的文章只是介绍hexo的相关改造，实际跟工程一样，开发只占20%到30%，剩下的大头成本主要是维护和优化。所以说hexo的优化和美化也是一个可以研究的，比如说扩展功能，调整主题，安装插件等，来丰富博客的功能。 主题设置我这边选的是NEXT主题，我们知道有一个配置文件_config.yml。主题对应也有这个设置，用来设置布局样式，展示按钮等。以下是主题的配置文件位置，后面我们很多的主题设置都">
+  <meta name="description" content="现在SpringBoot工程越来越常见，这个JAR文件包含了应用程序所有的依赖，以及一个内嵌的Servlet容器（如Tomcat或Jetty）。这意味着你可以像运行一个普通的Java应用程序一样运行你的Spring Boot应用，而不需要额外的Web服务器或应用服务器。 也就是说对应之前最早的像SSM这样的工程不一样，不需要放在tomcat里面去启动web工程。我们SpringBoot的web工程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo的优化和美化">
-<meta property="og:url" content="http://example.com/2023/04/19/hexo%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E7%BE%8E%E5%8C%96/index.html">
+<meta property="og:title" content="Java web工程的Jar包启动以及一下要注意的问题">
+<meta property="og:url" content="http://example.com/2024/02/24/Java-web%E5%B7%A5%E7%A8%8B%E7%9A%84Jar%E5%8C%85%E5%90%AF%E5%8A%A8%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%B8%8B%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="ZP Blog">
-<meta property="og:description" content="因为之前的文章只是介绍hexo的相关改造，实际跟工程一样，开发只占20%到30%，剩下的大头成本主要是维护和优化。所以说hexo的优化和美化也是一个可以研究的，比如说扩展功能，调整主题，安装插件等，来丰富博客的功能。 主题设置我这边选的是NEXT主题，我们知道有一个配置文件_config.yml。主题对应也有这个设置，用来设置布局样式，展示按钮等。以下是主题的配置文件位置，后面我们很多的主题设置都">
+<meta property="og:description" content="现在SpringBoot工程越来越常见，这个JAR文件包含了应用程序所有的依赖，以及一个内嵌的Servlet容器（如Tomcat或Jetty）。这意味着你可以像运行一个普通的Java应用程序一样运行你的Spring Boot应用，而不需要额外的Web服务器或应用服务器。 也就是说对应之前最早的像SSM这样的工程不一样，不需要放在tomcat里面去启动web工程。我们SpringBoot的web工程">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/hexo_next.png">
-<meta property="article:published_time" content="2023-04-19T09:13:17.000Z">
-<meta property="article:modified_time" content="2023-04-19T10:10:34.572Z">
+<meta property="article:published_time" content="2024-02-24T06:05:24.000Z">
+<meta property="article:modified_time" content="2024-02-24T06:05:36.781Z">
 <meta property="article:author" content="ZP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/hexo_next.png">
 
-<link rel="canonical" href="http://example.com/2023/04/19/hexo%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E7%BE%8E%E5%8C%96/">
+<link rel="canonical" href="http://example.com/2024/02/24/Java-web%E5%B7%A5%E7%A8%8B%E7%9A%84Jar%E5%8C%85%E5%90%AF%E5%8A%A8%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%B8%8B%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98/">
 
 
 <script id="page-configurations">
@@ -47,7 +45,7 @@
   };
 </script>
 
-  <title>hexo的优化和美化 | ZP Blog</title>
+  <title>Java web工程的Jar包启动以及一下要注意的问题 | ZP Blog</title>
   
 
 
@@ -211,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/19/hexo%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E7%BE%8E%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/24/Java-web%E5%B7%A5%E7%A8%8B%E7%9A%84Jar%E5%8C%85%E5%90%AF%E5%8A%A8%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%B8%8B%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -224,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          hexo的优化和美化
+          Java web工程的Jar包启动以及一下要注意的问题
         </h1>
 
         <div class="post-meta">
@@ -235,7 +233,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-04-19 17:13:17 / 修改时间：18:10:34" itemprop="dateCreated datePublished" datetime="2023-04-19T17:13:17+08:00">2023-04-19</time>
+              <time title="创建时间：2024-02-24 14:05:24 / 修改时间：14:05:36" itemprop="dateCreated datePublished" datetime="2024-02-24T14:05:24+08:00">2024-02-24</time>
             </span>
 
           
@@ -256,27 +254,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>因为之前的文章只是介绍hexo的相关改造，实际跟工程一样，开发只占20%到30%，剩下的大头成本主要是维护和优化。所以说hexo的优化和美化也是一个可以研究的，比如说扩展功能，调整主题，安装插件等，来丰富博客的功能。</p>
-<h3 id="主题设置"><a href="#主题设置" class="headerlink" title="主题设置"></a>主题设置</h3><p>我这边选的是NEXT主题，我们知道有一个配置文件_config.yml。主题对应也有这个设置，用来设置布局样式，展示按钮等。以下是主题的配置文件位置，后面我们很多的主题设置都要修改这个文件</p>
-<p><img src="/images/hexo_next.png" alt="主题配置文件位置"></p>
-<h4 id="NEXT主页样式"><a href="#NEXT主页样式" class="headerlink" title="NEXT主页样式"></a>NEXT主页样式</h4><p>next有四种风格,在站点配置文件搜索字段Scheme Settings可以看到，</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scheme: Muse</span><br><span class="line">#scheme: Mist</span><br><span class="line">#scheme: Pisces</span><br><span class="line">#scheme: Gemini</span><br></pre></td></tr></table></figure>
+        <p>现在SpringBoot工程越来越常见，这个JAR文件包含了应用程序所有的依赖，以及一个内嵌的Servlet容器（如Tomcat或Jetty）。这意味着你可以像运行一个普通的Java应用程序一样运行你的Spring Boot应用，而不需要额外的Web服务器或应用服务器。</p>
+<p>也就是说对应之前最早的像SSM这样的工程不一样，不需要放在tomcat里面去启动web工程。我们SpringBoot的web工程直接通过命令行形式就可以启动。</p>
+<p>打包过程：</p>
+<p>我们选择到对应的web工程模块，通过maven命令来打包，pom文件对应的打包形式也是jar包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;packaging&gt;jar&lt;/packaging&gt;</span><br></pre></td></tr></table></figure>
 
-<p>一般默认选择的是Muse，这里用的是四种：Gemini</p>
-<h4 id="menu开启与设置"><a href="#menu开启与设置" class="headerlink" title="menu开启与设置"></a>menu开启与设置</h4><p>设置完之后，发现整个博客是光秃秃的，看到别人的博客都有很多menu按钮。这些menu在哪里有呢，实际上在Next主题的配置文件具有对应的按钮在里面</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># ---------------------------------------------------------------</span><br><span class="line"># Menu Settings</span><br><span class="line"># ---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"># Usage: `Key: /link/ || icon`</span><br><span class="line"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.</span><br><span class="line"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span><br><span class="line"># When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -&gt; archives).</span><br><span class="line"># External url should start with http:// or https://</span><br><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  schedule: /schedule/ || fa fa-calendar</span><br><span class="line">  sitemap: /sitemap.xml || fa fa-sitemap</span><br><span class="line">  commonweal: /404/ || fa fa-heartbeat</span><br></pre></td></tr></table></figure>
-<p>里面有些没有展示出来，是被注释了，我们解开注释就可以了。</p>
-<p>但是menu有了，但是点击报错跳到空白页面，这就需要我们自己设置，已分类和标签例子。</p>
-<p>刚开始我们点击这两个按钮会报错“Cannot GET XXX”错误，问题的原因是我们没有初始化，初始化具体的步骤：<br></p>
-<p>1  创建对应的文件夹，可以通过命令在git bash 中输入以下代码创建相应的page：hexo new page “tags”hexo new page “categories”来创建文件夹。也可以手动创建文件夹，然后在里面创建index.md文件。</p>
-<p>2  在第一步完成后会在source文件夹中出现tags和categories的文件夹，在各自的文件夹里打开index.md文件进行修改(多加上一个type属性),标签的tags的index.md里面添加type: “tags”</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"><span class="attr">title</span>: tags</span><br><span class="line"><span class="attr">date</span>: <span class="number">2023</span>-<span class="number">04</span>-<span class="number">19</span> <span class="number">17</span>:<span class="number">04</span>:<span class="number">58</span></span><br><span class="line"><span class="attr">type</span>: <span class="string">&quot;tags&quot;</span></span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>我们用idea现成的工具就可以打包，在IDEA中进行打包操作。选择 “View” &gt; “Tool Windows” &gt; “Maven”，在打开的Maven窗口中，展开 “Lifecycle”，然后双击 “clean” 和 “package”。</p>
+<p>一般来说打的jar包位置都会在maven打包命令执行时会输出在命令行里，你也可以在对应的项目目录里面去找，会有对应的target包里面有。</p>
+<p>执行jar包:<br>我们找到对应的jar包的位置，可以直接在idea的命令行里面执行java的jar命令来执行启动jar包。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java -jar filename.jar</span><br><span class="line"></span><br><span class="line">比如</span><br><span class="line">java -jar E:\xxx_new_0512\xxx-web\target\xxx-web-1.0.0-SNAPSHOT.jar      </span><br></pre></td></tr></table></figure>
 
-
-
-<h3 id="文章设置"><a href="#文章设置" class="headerlink" title="文章设置"></a>文章设置</h3><p>文件有很多属性，比如说tag标签，设置置顶文件等，一般来说这些属性都在对应的markdown文件的Front-matter部分。</p>
-<h4 id="文章置顶"><a href="#文章置顶" class="headerlink" title="文章置顶"></a>文章置顶</h4><p>打开对应的文章文件，对应的目录是在source目录下面的_posts目录，里面保存的是我们的博客文章，文章也有对应的属性，在Front-matter里面设置的。我们通过设置sticky属性，设置为true即可置顶对应的这个文章。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: Mockito实战</span><br><span class="line">author: ZP</span><br><span class="line">date: 2023-04-19 16:40:35</span><br><span class="line">tags: Mockito</span><br><span class="line">sticky: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>有的时候我们会有多种环境配置文件，我们可以指定对应的执行环境配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar E:\xxx_new_0512\xxx-web\target\xxx-web-1.0.0-SNAPSHOT.jar --spring.profiles.active=t1   </span><br></pre></td></tr></table></figure>
+<p>如果是web工程，你可以像本地启动tomcat的web项目一样，去检查项目是否是正式启动。</p>
+<p>需要注意的问题：<br>jar和war包有什么区别？<br>其实war包就是一种特殊的jar包，JAR文件通常包含Java类文件（.class文件）和相关的元数据和资源（如文本、图片等）。它们可以包含任何你想要打包的内容，例如：Java库、应用程序等。它是Java应用程序的常见发布格式，可以被Java运行时环境（JRE）直接执行。</p>
+<p>war包就是用于打包Java Web应用程序。WAR文件的结构遵循Java EE标准，包含了Web应用程序需要的所有内容，如：JSP、Java类、图片、库文件（lib文件夹下的JAR文件）、部署描述符（WEB-INF&#x2F;web.xml）等。WAR文件通常被部署在一个支持Java EE的Web服务器或应用服务器（如Tomcat、Jetty、GlassFish、JBoss等）上。</p>
+<p>所以如果你的web工程时现在使用比较广泛的Spring Boot的web工程，jar包就可以，因为他内嵌了一个web服务器在里面。如果你的是旧的需要依赖web服务器的只能用war包，要通过传统方式来启动。</p>
+<p>Spring Boot多个模块形式，打包web工程模块并启动，但是改动没有生效？</p>
+<p>web工程是多种模块&#x2F;module的形式，这些模块是依赖关系，如果我们的修改不是对应web模块，我们打包的module模块的jar包是没有更新修改，因为jar包里面对应修改的依赖jar包没有更新。</p>
+<p>所以最好是对整个工程，执行maven命令clean 以及install构建一下项目，然后再去对应的web工程模块构建打包。</p>
+<p>如何查看jar包内容？<br>我想知道jar包内容，可以通过反编译工具来查看，我们可以查看jar包是否构建最新的修改，以及里面对应依赖包的版本。（反编译（Decompiling）是将已编译的程序代码（通常是机器代码或字节码）转换回源代码的过程。这个过程并不总是能够完全准确，因为在编译过程中，源代码中的一些信息（如注释、格式化、局部变量名等）可能会丢失。）</p>
+<p>这里我推荐几个工具，一个是可视化工具JD-GUI，另一种是要下载在命令行中运行的反编译器，这一类要麻烦一些。下载对应的文件，比如说Procyon。从GitHub下载Procyon的jar文件，使用以下命令来运行Procyon反编译器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar procyon-decompiler.jar -jar &lt;input&gt;.jar -o &lt;output_directory&gt;</span><br></pre></td></tr></table></figure>
+<p>如果你想反编译一个名为example.jar的jar文件，并将反编译后的代码保存在名为decompiled的文件夹中，你可以运行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -jar procyon-decompiler.jar -jar example.jar -o decompiled</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>打开对应的decompiled，就是对应的jar包反编译文件。</p>
 
     </div>
 
@@ -292,13 +295,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/04/19/Mockito%E5%AE%9E%E6%88%98/" rel="prev" title="Mockito实战">
-      <i class="fa fa-chevron-left"></i> Mockito实战
+    <a href="/2023/04/19/hexo%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E7%BE%8E%E5%8C%96/" rel="prev" title="hexo的优化和美化">
+      <i class="fa fa-chevron-left"></i> hexo的优化和美化
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/02/24/Java-web%E5%B7%A5%E7%A8%8B%E7%9A%84Jar%E5%8C%85%E5%90%AF%E5%8A%A8%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%B8%8B%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98/" rel="next" title="Java web工程的Jar包启动以及一下要注意的问题">
-      Java web工程的Jar包启动以及一下要注意的问题 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -357,7 +357,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">主题设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NEXT%E4%B8%BB%E9%A1%B5%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">NEXT主页样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#menu%E5%BC%80%E5%90%AF%E4%B8%8E%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">menu开启与设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">文章设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%BD%AE%E9%A1%B6"><span class="nav-number">2.1.</span> <span class="nav-text">文章置顶</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
