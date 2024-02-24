@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="因为之前的文章只是介绍hexo的相关改造，实际跟工程一样，开发只占20%到30%，剩下的大头成本主要是维护和优化。所以说hexo的优化和美化也是一个可以研究的，比如说扩展功能，调整主题，安装插件等，来丰富博客的功能。 主题设置我这边选的是NEXT主题，我们知道有一个配置文件_config.yml。主题对应也有这个设置，用来设置布局样式，展示按钮等。以下是主题的配置文件位置，后面我们很多的主题设置都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo的优化和美化">
+<meta property="og:url" content="http://example.com/2023/04/19/hexo%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E7%BE%8E%E5%8C%96/index.html">
+<meta property="og:site_name" content="ZP Blog">
+<meta property="og:description" content="因为之前的文章只是介绍hexo的相关改造，实际跟工程一样，开发只占20%到30%，剩下的大头成本主要是维护和优化。所以说hexo的优化和美化也是一个可以研究的，比如说扩展功能，调整主题，安装插件等，来丰富博客的功能。 主题设置我这边选的是NEXT主题，我们知道有一个配置文件_config.yml。主题对应也有这个设置，用来设置布局样式，展示按钮等。以下是主题的配置文件位置，后面我们很多的主题设置都">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/hexo_next.png">
+<meta property="article:published_time" content="2023-04-19T09:13:17.000Z">
+<meta property="article:modified_time" content="2024-02-24T06:29:00.609Z">
+<meta property="article:author" content="ZP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/hexo_next.png">
+
+<link rel="canonical" href="http://example.com/2023/04/19/hexo%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E7%BE%8E%E5%8C%96/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>hexo的优化和美化 | ZP Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZP Blog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ZP Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/19/hexo%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E7%BE%8E%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZP">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZP Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hexo的优化和美化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-19 17:13:17" itemprop="dateCreated datePublished" datetime="2023-04-19T17:13:17+08:00">2023-04-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-02-24 14:29:00" itemprop="dateModified" datetime="2024-02-24T14:29:00+08:00">2024-02-24</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>因为之前的文章只是介绍hexo的相关改造，实际跟工程一样，开发只占20%到30%，剩下的大头成本主要是维护和优化。所以说hexo的优化和美化也是一个可以研究的，比如说扩展功能，调整主题，安装插件等，来丰富博客的功能。</p>
+<h3 id="主题设置"><a href="#主题设置" class="headerlink" title="主题设置"></a>主题设置</h3><p>我这边选的是NEXT主题，我们知道有一个配置文件_config.yml。主题对应也有这个设置，用来设置布局样式，展示按钮等。以下是主题的配置文件位置，后面我们很多的主题设置都要修改这个文件</p>
+<p><img src="/images/hexo_next.png" alt="主题配置文件位置"></p>
+<h4 id="NEXT主页样式"><a href="#NEXT主页样式" class="headerlink" title="NEXT主页样式"></a>NEXT主页样式</h4><p>next有四种风格,在站点配置文件搜索字段Scheme Settings可以看到，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scheme: Muse</span><br><span class="line">#scheme: Mist</span><br><span class="line">#scheme: Pisces</span><br><span class="line">#scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+<p>一般默认选择的是Muse，这里用的是四种：Gemini</p>
+<h4 id="menu开启与设置"><a href="#menu开启与设置" class="headerlink" title="menu开启与设置"></a>menu开启与设置</h4><p>设置完之后，发现整个博客是光秃秃的，看到别人的博客都有很多menu按钮。这些menu在哪里有呢，实际上在Next主题的配置文件具有对应的按钮在里面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># ---------------------------------------------------------------</span><br><span class="line"># Menu Settings</span><br><span class="line"># ---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"># Usage: `Key: /link/ || icon`</span><br><span class="line"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.</span><br><span class="line"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span><br><span class="line"># When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -&gt; archives).</span><br><span class="line"># External url should start with http:// or https://</span><br><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  schedule: /schedule/ || fa fa-calendar</span><br><span class="line">  sitemap: /sitemap.xml || fa fa-sitemap</span><br><span class="line">  commonweal: /404/ || fa fa-heartbeat</span><br></pre></td></tr></table></figure>
+<p>里面有些没有展示出来，是被注释了，我们解开注释就可以了。</p>
+<p>但是menu有了，但是点击报错跳到空白页面，这就需要我们自己设置，已分类和标签例子。</p>
+<p>刚开始我们点击这两个按钮会报错“Cannot GET XXX”错误，问题的原因是我们没有初始化，初始化具体的步骤：<br></p>
+<p>1  创建对应的文件夹，可以通过命令在git bash 中输入以下代码创建相应的page：hexo new page “tags”hexo new page “categories”来创建文件夹。也可以手动创建文件夹，然后在里面创建index.md文件。</p>
+<p>2  在第一步完成后会在source文件夹中出现tags和categories的文件夹，在各自的文件夹里打开index.md文件进行修改(多加上一个type属性),标签的tags的index.md里面添加type: “tags”</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"><span class="attr">title</span>: tags</span><br><span class="line"><span class="attr">date</span>: <span class="number">2023</span>-<span class="number">04</span>-<span class="number">19</span> <span class="number">17</span>:<span class="number">04</span>:<span class="number">58</span></span><br><span class="line"><span class="attr">type</span>: <span class="string">&quot;tags&quot;</span></span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="文章设置"><a href="#文章设置" class="headerlink" title="文章设置"></a>文章设置</h3><p>文件有很多属性，比如说tag标签，设置置顶文件等，一般来说这些属性都在对应的markdown文件的Front-matter部分。</p>
+<h4 id="文章置顶"><a href="#文章置顶" class="headerlink" title="文章置顶"></a>文章置顶</h4><p>打开对应的文章文件，对应的目录是在source目录下面的_posts目录，里面保存的是我们的博客文章，文章也有对应的属性，在Front-matter里面设置的。我们通过设置sticky属性，设置为true即可置顶对应的这个文章。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: Mockito实战</span><br><span class="line">author: ZP</span><br><span class="line">date: 2023-04-19 16:40:35</span><br><span class="line">tags: Mockito</span><br><span class="line">sticky: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/19/Mockito%E5%AE%9E%E6%88%98/" rel="prev" title="Mockito实战">
+      <i class="fa fa-chevron-left"></i> Mockito实战
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/02/24/Java-web%E5%B7%A5%E7%A8%8B%E7%9A%84Jar%E5%8C%85%E5%90%AF%E5%8A%A8%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%B8%8B%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98/" rel="next" title="Java web工程的Jar包启动以及一下要注意的问题">
+      Java web工程的Jar包启动以及一下要注意的问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">主题设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NEXT%E4%B8%BB%E9%A1%B5%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">NEXT主页样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#menu%E5%BC%80%E5%90%AF%E4%B8%8E%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">menu开启与设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">文章设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%BD%AE%E9%A1%B6"><span class="nav-number">2.1.</span> <span class="nav-text">文章置顶</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZP</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZP</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
