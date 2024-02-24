@@ -72,8 +72,9 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="ZP Blog" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<link rel="stylesheet" href="/css/prism.css" type="text/css"><link rel="alternate" href="/atom.xml" title="ZP Blog" type="application/atom+xml">
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -230,10 +231,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-04-19 16:40:35 / 修改时间：18:10:34" itemprop="dateCreated datePublished" datetime="2023-04-19T16:40:35+08:00">2023-04-19</time>
+              <time title="创建时间：2023-04-19 16:40:35" itemprop="dateCreated datePublished" datetime="2023-04-19T16:40:35+08:00">2023-04-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-02-24 14:29:00" itemprop="dateModified" datetime="2024-02-24T14:29:00+08:00">2024-02-24</time>
+              </span>
 
           
 
@@ -315,6 +322,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/24/Java-web%E5%B7%A5%E7%A8%8B%E7%9A%84Jar%E5%8C%85%E5%90%AF%E5%8A%A8%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%B8%8B%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZP">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZP Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/02/24/Java-web%E5%B7%A5%E7%A8%8B%E7%9A%84Jar%E5%8C%85%E5%90%AF%E5%8A%A8%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%B8%8B%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Java web工程的Jar包启动以及一下要注意的问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-02-24 14:05:24 / 修改时间：14:29:00" itemprop="dateCreated datePublished" datetime="2024-02-24T14:05:24+08:00">2024-02-24</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>现在SpringBoot工程越来越常见，这个JAR文件包含了应用程序所有的依赖，以及一个内嵌的Servlet容器（如Tomcat或Jetty）。这意味着你可以像运行一个普通的Java应用程序一样运行你的Spring Boot应用，而不需要额外的Web服务器或应用服务器。</p>
+<p>也就是说对应之前最早的像SSM这样的工程不一样，不需要放在tomcat里面去启动web工程。我们SpringBoot的web工程直接通过命令行形式就可以启动。</p>
+<p>打包过程：</p>
+<p>我们选择到对应的web工程模块，通过maven命令来打包，pom文件对应的打包形式也是jar包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;packaging&gt;jar&lt;/packaging&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我们用idea现成的工具就可以打包，在IDEA中进行打包操作。选择 “View” &gt; “Tool Windows” &gt; “Maven”，在打开的Maven窗口中，展开 “Lifecycle”，然后双击 “clean” 和 “package”。</p>
+<p>一般来说打的jar包位置都会在maven打包命令执行时会输出在命令行里，你也可以在对应的项目目录里面去找，会有对应的target包里面有。</p>
+<p>执行jar包:<br>我们找到对应的jar包的位置，可以直接在idea的命令行里面执行java的jar命令来执行启动jar包。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java -jar filename.jar</span><br><span class="line"></span><br><span class="line">比如</span><br><span class="line">java -jar E:\xxx_new_0512\xxx-web\target\xxx-web-1.0.0-SNAPSHOT.jar      </span><br></pre></td></tr></table></figure>
+
+<p>有的时候我们会有多种环境配置文件，我们可以指定对应的执行环境配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar E:\xxx_new_0512\xxx-web\target\xxx-web-1.0.0-SNAPSHOT.jar --spring.profiles.active=t1   </span><br></pre></td></tr></table></figure>
+<p>如果是web工程，你可以像本地启动tomcat的web项目一样，去检查项目是否是正式启动。</p>
+<p>需要注意的问题：<br>jar和war包有什么区别？<br>其实war包就是一种特殊的jar包，JAR文件通常包含Java类文件（.class文件）和相关的元数据和资源（如文本、图片等）。它们可以包含任何你想要打包的内容，例如：Java库、应用程序等。它是Java应用程序的常见发布格式，可以被Java运行时环境（JRE）直接执行。</p>
+<p>war包就是用于打包Java Web应用程序。WAR文件的结构遵循Java EE标准，包含了Web应用程序需要的所有内容，如：JSP、Java类、图片、库文件（lib文件夹下的JAR文件）、部署描述符（WEB-INF&#x2F;web.xml）等。WAR文件通常被部署在一个支持Java EE的Web服务器或应用服务器（如Tomcat、Jetty、GlassFish、JBoss等）上。</p>
+<p>所以如果你的web工程时现在使用比较广泛的Spring Boot的web工程，jar包就可以，因为他内嵌了一个web服务器在里面。如果你的是旧的需要依赖web服务器的只能用war包，要通过传统方式来启动。</p>
+<p>Spring Boot多个模块形式，打包web工程模块并启动，但是改动没有生效？</p>
+<p>web工程是多种模块&#x2F;module的形式，这些模块是依赖关系，如果我们的修改不是对应web模块，我们打包的module模块的jar包是没有更新修改，因为jar包里面对应修改的依赖jar包没有更新。</p>
+<p>所以最好是对整个工程，执行maven命令clean 以及install构建一下项目，然后再去对应的web工程模块构建打包。</p>
+<p>如何查看jar包内容？<br>我想知道jar包内容，可以通过反编译工具来查看，我们可以查看jar包是否构建最新的修改，以及里面对应依赖包的版本。（反编译（Decompiling）是将已编译的程序代码（通常是机器代码或字节码）转换回源代码的过程。这个过程并不总是能够完全准确，因为在编译过程中，源代码中的一些信息（如注释、格式化、局部变量名等）可能会丢失。）</p>
+<p>这里我推荐几个工具，一个是可视化工具JD-GUI，另一种是要下载在命令行中运行的反编译器，这一类要麻烦一些。下载对应的文件，比如说Procyon。从GitHub下载Procyon的jar文件，使用以下命令来运行Procyon反编译器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar procyon-decompiler.jar -jar &lt;input&gt;.jar -o &lt;output_directory&gt;</span><br></pre></td></tr></table></figure>
+<p>如果你想反编译一个名为example.jar的jar文件，并将反编译后的代码保存在名为decompiled的文件夹中，你可以运行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -jar procyon-decompiler.jar -jar example.jar -o decompiled</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>打开对应的decompiled，就是对应的jar包反编译文件。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/19/hexo%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E7%BE%8E%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -338,11 +430,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-04-19 17:13:17 / 修改时间：18:10:34" itemprop="dateCreated datePublished" datetime="2023-04-19T17:13:17+08:00">2023-04-19</time>
+              <time title="创建时间：2023-04-19 17:13:17" itemprop="dateCreated datePublished" datetime="2023-04-19T17:13:17+08:00">2023-04-19</time>
             </span>
-
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-02-24 14:29:00" itemprop="dateModified" datetime="2024-02-24T14:29:00+08:00">2024-02-24</time>
+              </span>
           
 
         </div>
@@ -425,7 +522,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-19 18:10:34" itemprop="dateModified" datetime="2023-04-19T18:10:34+08:00">2023-04-19</time>
+                <time title="修改时间：2024-02-24 14:29:00" itemprop="dateModified" datetime="2024-02-24T14:29:00+08:00">2024-02-24</time>
               </span>
 
           
@@ -492,7 +589,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-19 18:10:34" itemprop="dateModified" datetime="2023-04-19T18:10:34+08:00">2023-04-19</time>
+                <time title="修改时间：2024-02-24 14:29:00" itemprop="dateModified" datetime="2024-02-24T14:29:00+08:00">2024-02-24</time>
               </span>
 
           
@@ -598,7 +695,8 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -632,7 +730,8 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
